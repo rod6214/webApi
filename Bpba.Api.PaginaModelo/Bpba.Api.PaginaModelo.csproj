@@ -113,6 +113,7 @@
     <Compile Include="Controllers\ControladorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
+    <Compile Include="Controllers\UsuariosAccessController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
