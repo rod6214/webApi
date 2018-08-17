@@ -1,0 +1,488 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="paginaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="paginaModelStoreContainer">
+    <EntitySet Name="Personas" EntityType="paginaModel.Store.Personas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Usuarios" EntityType="paginaModel.Store.Usuarios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sesiones" EntityType="paginaModel.Store.Sesiones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Perfiles" EntityType="paginaModel.Store.Perfiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Articulos" EntityType="paginaModel.Store.Articulos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Inventarios" EntityType="paginaModel.Store.Inventarios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ventas" EntityType="paginaModel.Store.Ventas" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PersonaUsuario" Association="paginaModel.Store.PersonaUsuario">
+      <End Role="Persona" EntitySet="Personas" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioSesion" Association="paginaModel.Store.UsuarioSesion">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Sesion" EntitySet="Sesiones" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioPerfil" Association="paginaModel.Store.UsuarioPerfil">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Perfil" EntitySet="Perfiles" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioInventario" Association="paginaModel.Store.UsuarioInventario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Inventario" EntitySet="Inventarios" />
+    </AssociationSet>
+    <AssociationSet Name="ArticuloInventario" Association="paginaModel.Store.ArticuloInventario">
+      <End Role="Articulo" EntitySet="Articulos" />
+      <End Role="Inventario" EntitySet="Inventarios" />
+    </AssociationSet>
+    <AssociationSet Name="InventarioVenta" Association="paginaModel.Store.InventarioVenta">
+      <End Role="Inventario" EntitySet="Inventarios" />
+      <End Role="Venta" EntitySet="Ventas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Personas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="apellido" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="correo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telefono" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="pais" Type="tinyint" Nullable="false" />
+    <Property Name="direccion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="pass" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Persona_id" Type="int" Nullable="false" />
+    <Property Name="lastlogin" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sesiones">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="key" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isonline" Type="bit" Nullable="false" />
+    <Property Name="Usuario_id" Type="int" Nullable="false" />
+    <Property Name="duracion" Type="time" Nullable="false" />
+    <Property Name="initTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Perfiles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="acceso" Type="tinyint" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Usuario_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Articulos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Inventarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="disponible" Type="bit" Nullable="false" />
+    <Property Name="precio" Type="decimal" Nullable="false" />
+    <Property Name="ciudad" Type="int" Nullable="false" />
+    <Property Name="Usuario_id" Type="int" Nullable="false" />
+    <Property Name="Articulo_id" Type="int" Nullable="false" />
+    <Property Name="pais" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ventas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="Inventario_id" Type="int" Nullable="false" />
+    <Property Name="comprador_id" Type="int" Nullable="false" />
+    <Property Name="status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <Association Name="PersonaUsuario">
+    <End Role="Persona" Type="paginaModel.Store.Personas" Multiplicity="1" />
+    <End Role="Usuario" Type="paginaModel.Store.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Persona_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioSesion">
+    <End Role="Usuario" Type="paginaModel.Store.Usuarios" Multiplicity="1" />
+    <End Role="Sesion" Type="paginaModel.Store.Sesiones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Sesion">
+        <PropertyRef Name="Usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioPerfil">
+    <End Role="Usuario" Type="paginaModel.Store.Usuarios" Multiplicity="1" />
+    <End Role="Perfil" Type="paginaModel.Store.Perfiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Perfil">
+        <PropertyRef Name="Usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioInventario">
+    <End Role="Usuario" Type="paginaModel.Store.Usuarios" Multiplicity="1" />
+    <End Role="Inventario" Type="paginaModel.Store.Inventarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Inventario">
+        <PropertyRef Name="Usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ArticuloInventario">
+    <End Role="Articulo" Type="paginaModel.Store.Articulos" Multiplicity="1" />
+    <End Role="Inventario" Type="paginaModel.Store.Inventarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Inventario">
+        <PropertyRef Name="Articulo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="InventarioVenta">
+    <End Role="Inventario" Type="paginaModel.Store.Inventarios" Multiplicity="1" />
+    <End Role="Venta" Type="paginaModel.Store.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Inventario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="paginaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="paginaEntities" annotation:LazyLoadingEnabled="false" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" >
+          <EntitySet Name="Personas" EntityType="paginaModel.Persona" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <EntitySet Name="Usuarios" EntityType="paginaModel.Usuario" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <AssociationSet Name="PersonaUsuario" Association="paginaModel.PersonaUsuario">
+            <End Role="Persona" EntitySet="Personas" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <EntitySet Name="Sesiones" EntityType="paginaModel.Sesion" a:GetterAccess="Internal" />
+          <AssociationSet Name="UsuarioSesion" Association="paginaModel.UsuarioSesion">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Sesion" EntitySet="Sesiones" />
+          </AssociationSet>
+          <EntitySet Name="Perfiles" EntityType="paginaModel.Perfil" a:GetterAccess="Internal" />
+          <AssociationSet Name="UsuarioPerfil" Association="paginaModel.UsuarioPerfil">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Perfil" EntitySet="Perfiles" />
+          </AssociationSet>
+          <EntitySet Name="Articulos" EntityType="paginaModel.Articulo" a:GetterAccess="Internal" />
+          <EntitySet Name="Inventarios" EntityType="paginaModel.Inventario" a:GetterAccess="Internal" />
+          <AssociationSet Name="UsuarioInventario" Association="paginaModel.UsuarioInventario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Inventario" EntitySet="Inventarios" />
+          </AssociationSet>
+          <AssociationSet Name="ArticuloInventario" Association="paginaModel.ArticuloInventario">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="Inventario" EntitySet="Inventarios" />
+          </AssociationSet>
+          <EntitySet Name="Ventas" EntityType="paginaModel.Venta" a:GetterAccess="Internal" />
+          <AssociationSet Name="InventarioVenta" Association="paginaModel.InventarioVenta">
+            <End Role="Inventario" EntitySet="Inventarios" />
+            <End Role="Venta" EntitySet="Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Persona" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" />
+          <Property Name="apellido" Type="String" Nullable="false" />
+          <Property Name="correo" Type="String" Nullable="false" />
+          <Property Name="telefono" Type="String" Nullable="false" />
+          <Property Name="pais" Type="Byte" Nullable="false" />
+          <Property Name="direccion" Type="String" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="paginaModel.PersonaUsuario" FromRole="Persona" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" />
+          <Property Name="pass" Type="String" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="paginaModel.PersonaUsuario" FromRole="Usuario" ToRole="Persona" />
+          <Property Name="Persona_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sesion" Relationship="paginaModel.UsuarioSesion" FromRole="Usuario" ToRole="Sesion" />
+          <NavigationProperty Name="Perfil" Relationship="paginaModel.UsuarioPerfil" FromRole="Usuario" ToRole="Perfil" />
+          <NavigationProperty Name="Inventario" Relationship="paginaModel.UsuarioInventario" FromRole="Usuario" ToRole="Inventario" />
+          <Property Name="lastlogin" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="PersonaUsuario">
+          <End Type="paginaModel.Persona" Role="Persona" Multiplicity="1" />
+          <End Type="paginaModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Persona_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sesion" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="key" Type="String" Nullable="false" />
+          <Property Name="value" Type="String" Nullable="false" />
+          <Property Name="isonline" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="paginaModel.UsuarioSesion" FromRole="Sesion" ToRole="Usuario" />
+          <Property Name="Usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="duracion" Type="Time" Nullable="false" />
+          <Property Name="initTime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="UsuarioSesion">
+          <End Type="paginaModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="paginaModel.Sesion" Role="Sesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sesion">
+              <PropertyRef Name="Usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Perfil" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="acceso" Type="Byte" Nullable="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="paginaModel.UsuarioPerfil" FromRole="Perfil" ToRole="Usuario" />
+          <Property Name="Usuario_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UsuarioPerfil">
+          <End Type="paginaModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="paginaModel.Perfil" Role="Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Perfil">
+              <PropertyRef Name="Usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Articulo" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" />
+          <NavigationProperty Name="Inventario" Relationship="paginaModel.ArticuloInventario" FromRole="Articulo" ToRole="Inventario" />
+        </EntityType>
+        <EntityType Name="Inventario" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="disponible" Type="Boolean" Nullable="false" />
+          <Property Name="precio" Type="Decimal" Nullable="false" />
+          <Property Name="ciudad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="paginaModel.UsuarioInventario" FromRole="Inventario" ToRole="Usuario" />
+          <Property Name="Usuario_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articulo" Relationship="paginaModel.ArticuloInventario" FromRole="Inventario" ToRole="Articulo" />
+          <Property Name="Articulo_id" Type="Int32" Nullable="false" />
+          <Property Name="pais" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Venta" Relationship="paginaModel.InventarioVenta" FromRole="Inventario" ToRole="Venta" />
+        </EntityType>
+        <Association Name="UsuarioInventario">
+          <End Type="paginaModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="paginaModel.Inventario" Role="Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="Usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ArticuloInventario">
+          <End Type="paginaModel.Articulo" Role="Articulo" Multiplicity="1" />
+          <End Type="paginaModel.Inventario" Role="Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="Articulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Venta" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Inventario" Relationship="paginaModel.InventarioVenta" FromRole="Venta" ToRole="Inventario" />
+          <Property Name="Inventario_id" Type="Int32" Nullable="false" />
+          <Property Name="comprador_id" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+        </EntityType>
+        <Association Name="InventarioVenta">
+          <End Type="paginaModel.Inventario" Role="Inventario" Multiplicity="1" />
+          <End Type="paginaModel.Venta" Role="Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="Inventario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="paginaModelStoreContainer" CdmEntityContainer="paginaEntities">
+    <EntitySetMapping Name="Personas">
+      <EntityTypeMapping TypeName="IsTypeOf(paginaModel.Persona)">
+        <MappingFragment StoreEntitySet="Personas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="pais" ColumnName="pais" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="IsTypeOf(paginaModel.Usuario)">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="Persona_id" ColumnName="Persona_id" />
+          <ScalarProperty Name="lastlogin" ColumnName="lastlogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sesiones">
+      <EntityTypeMapping TypeName="IsTypeOf(paginaModel.Sesion)">
+        <MappingFragment StoreEntitySet="Sesiones">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="key" ColumnName="key" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="isonline" ColumnName="isonline" />
+          <ScalarProperty Name="Usuario_id" ColumnName="Usuario_id" />
+          <ScalarProperty Name="duracion" ColumnName="duracion" />
+          <ScalarProperty Name="initTime" ColumnName="initTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Perfiles">
+      <EntityTypeMapping TypeName="IsTypeOf(paginaModel.Perfil)">
+        <MappingFragment StoreEntitySet="Perfiles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="acceso" ColumnName="acceso" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Usuario_id" ColumnName="Usuario_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Articulos">
+      <EntityTypeMapping TypeName="IsTypeOf(paginaModel.Articulo)">
+        <MappingFragment StoreEntitySet="Articulos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inventarios">
+      <EntityTypeMapping TypeName="IsTypeOf(paginaModel.Inventario)">
+        <MappingFragment StoreEntitySet="Inventarios">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="disponible" ColumnName="disponible" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="Usuario_id" ColumnName="Usuario_id" />
+          <ScalarProperty Name="Articulo_id" ColumnName="Articulo_id" />
+          <ScalarProperty Name="pais" ColumnName="pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ventas">
+      <EntityTypeMapping TypeName="IsTypeOf(paginaModel.Venta)">
+        <MappingFragment StoreEntitySet="Ventas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="Inventario_id" ColumnName="Inventario_id" />
+          <ScalarProperty Name="comprador_id" ColumnName="comprador_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

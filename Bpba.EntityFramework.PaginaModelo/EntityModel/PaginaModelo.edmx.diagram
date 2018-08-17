@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="65153f7cec7a44cc99831420905295c6" Name="Principal" >
+        <EntityTypeShape EntityType="paginaModel.Persona" Width="1.5" PointX="0.5" PointY="4.75" />
+        <EntityTypeShape EntityType="paginaModel.Usuario" Width="1.5" PointX="3.75" PointY="5" />
+        <AssociationConnector Association="paginaModel.PersonaUsuario" />
+        <EntityTypeShape EntityType="paginaModel.Sesion" Width="1.5" PointX="3.75" PointY="1.625" />
+        <AssociationConnector Association="paginaModel.UsuarioSesion" />
+        <EntityTypeShape EntityType="paginaModel.Perfil" Width="1.5" PointX="6.5" PointY="5.125" />
+        <AssociationConnector Association="paginaModel.UsuarioPerfil" />
+        <EntityTypeShape EntityType="paginaModel.Articulo" Width="1.5" PointX="0.5" PointY="8.5" />
+        <EntityTypeShape EntityType="paginaModel.Inventario" Width="1.5" PointX="3.75" PointY="8.5" />
+        <AssociationConnector Association="paginaModel.UsuarioInventario" />
+        <AssociationConnector Association="paginaModel.ArticuloInventario" />
+        <EntityTypeShape EntityType="paginaModel.Venta" Width="1.5" PointX="0.5" PointY="11" />
+        <AssociationConnector Association="paginaModel.InventarioVenta" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
