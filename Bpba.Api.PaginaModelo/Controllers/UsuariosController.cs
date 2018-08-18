@@ -1,4 +1,5 @@
-﻿using Bpba.Models.PaginaModelo.Personas;
+﻿using Bpba.Api.PaginaModelo.Security;
+using Bpba.Models.PaginaModelo.Personas;
 using Bpba.Models.PaginaModelo.Sesiones;
 using Bpba.Services.PaginaModelo.Validation;
 using System;
@@ -13,10 +14,13 @@ namespace Bpba.Api.PaginaModelo.Controllers
     [RoutePrefix("api/usuarios")]
     public class UsuariosController : ApiController
     {
+        [SecurityAccess(Users = "rod6214",Roles = "pupu")]
         [Route("persona/modificar")]
-        [HttpPut]
+        [HttpGet]
         public void ModificarDatosPersonales(PersonaModel persona)
         {
+            
+            Console.WriteLine();
         }
         [Route("articulo/registrar")]
         [HttpPost]

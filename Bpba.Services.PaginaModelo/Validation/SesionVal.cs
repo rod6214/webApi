@@ -16,7 +16,8 @@ namespace Bpba.Services.PaginaModelo.Validation
         private UsuarioRetriever _usrRet = new UsuarioRetriever();
         private SesionModel _sesion;
         private int _sesionCount;
-        private const string SESION_ALIAS = "user";
+        public const string SESION_ALIAS = "user";
+        public const string SESION_ALIAS2 = "Token";
         public int SesionCount => _sesionCount;
         public bool IsValidSesion => ValidateSesion();
         public TimeSpan Duration => _sesion.Duracion;
@@ -50,7 +51,8 @@ namespace Bpba.Services.PaginaModelo.Validation
                 Duracion = duracion
             };
             sesion = sesRet.Register(sesion);
-            sesion.Key = SESION_ALIAS + (sesion.Id).ToString();
+            sesion.Key = SESION_ALIAS2;
+            //sesion.Key = SESION_ALIAS + (sesion.Id).ToString();
             sesRet.Update(sesion);
             CookieModel cookie = new CookieModel
             {

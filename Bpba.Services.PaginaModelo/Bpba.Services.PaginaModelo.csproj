@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\SecurityToken.cs" />
     <Compile Include="Validation\LoginVal.cs" />
     <Compile Include="Validation\Permisos.cs" />
     <Compile Include="Validation\SesionVal.cs" />
