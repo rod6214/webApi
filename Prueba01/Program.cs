@@ -28,9 +28,10 @@ namespace Prueba01
             //TimeSpan time = new TimeSpan(365, 0, 0, 0, 0);
             //DateTime duracion = DateTime.Now;
             //DateTime dur2 = duracion + time;
-            RootRegister();
-            
+            //RootRegister();
+            //AccountAccess access = AccountAccess.ADMIN | AccountAccess.USER;   
         }
+
 
         public static void RootRegister()
         {

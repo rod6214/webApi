@@ -7,6 +7,7 @@ using Util.Enums;
 using System.Security.Cryptography;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Web.Http.Controllers;
 
 namespace Util.Converters
 {
@@ -29,7 +30,11 @@ namespace Util.Converters
             //    return AccountAccess.PUSER;
             return AccountAccess.UNDEFINED;
         }
-
+        public string GetHeaderKeyPair(HttpActionContext actionContext, string key)
+        {
+            return actionContext?.Request?.Headers?.Where(x => x.Key.Equals(key))?
+                .FirstOrDefault().Value?.FirstOrDefault();
+        }
         public string AccessAccountToString(AccountAccess access)
         { return access.ToString(); }
 

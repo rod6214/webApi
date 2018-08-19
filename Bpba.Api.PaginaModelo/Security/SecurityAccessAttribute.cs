@@ -7,11 +7,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using Util.Enums;
 
 namespace Bpba.Api.PaginaModelo.Security
 {
     public class SecurityAccessAttribute : AuthorizeAttribute
     {
+        public new AccountAccess Roles { get; set; }
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
             string tokenName = SesionVal.SESION_ALIAS2;
@@ -22,7 +24,7 @@ namespace Bpba.Api.PaginaModelo.Security
             {
                 Key = tokenName,
                 Value = value
-            });
+            }, Roles);
         }
     }
 }

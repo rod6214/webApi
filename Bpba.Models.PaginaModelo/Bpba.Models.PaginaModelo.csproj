@@ -49,6 +49,7 @@
     <Compile Include="Hashes\Hash256Model.cs" />
     <Compile Include="Personas\PersonaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Usuarios\RegistroUsuarioModel.cs" />
     <Compile Include="Usuarios\UsuarioModel.cs" />
     <Compile Include="Usuarios\UsuarioRegisterModel.cs" />
     <Compile Include="Usuarios\UsuarioResultModel.cs" />

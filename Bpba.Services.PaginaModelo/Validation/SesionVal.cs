@@ -34,26 +34,29 @@ namespace Bpba.Services.PaginaModelo.Validation
         {
             Random rnd = new Random();
             SesionRetriever sesRet = new SesionRetriever();
-            List<SesionModel> lstSesiones = new List<SesionModel>();
-            foreach (var psesion in sesRet.GetAll())
-                lstSesiones.Add(psesion);
-            var sesionCount = lstSesiones.Count();
-            var valueCalculated = new Converter().
-                Encrypt256(usuario.Nombre + usuario.Id + (rnd.Next(13, 65535)).ToString());
-            SesionModel sesion = new SesionModel
+            SesionModel sesion = sesRet.GetByUsuarioId(usuario.Id);
+            if(sesion == null)
             {
-                Key = "",
-                Value = valueCalculated,
-                TiempoInicial = DateTime.Now,
-                Isonline = true,
-                Id = 0,
-                Usuario_id = usuario.Id,
-                Duracion = duracion
-            };
-            sesion = sesRet.Register(sesion);
-            sesion.Key = SESION_ALIAS2;
-            //sesion.Key = SESION_ALIAS + (sesion.Id).ToString();
-            sesRet.Update(sesion);
+                var valueCalculated = new Converter().
+                Encrypt256(usuario.Nombre + usuario.Id + (rnd.Next(13, 65535)).ToString());
+                sesion = new SesionModel
+                {
+                    Key = SESION_ALIAS2,
+                    Value = valueCalculated,
+                    TiempoInicial = DateTime.Now,
+                    Isonline = true,
+                    Id = 0,
+                    Usuario_id = usuario.Id,
+                    Duracion = duracion
+                };
+                sesion = sesRet.Register(sesion);
+            }
+            else
+            {
+                sesion.TiempoInicial = DateTime.Now;
+                sesRet.Update(sesion);
+            }
+            
             CookieModel cookie = new CookieModel
             {
                 Key = sesion.Key,

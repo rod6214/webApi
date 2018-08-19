@@ -10,7 +10,7 @@ namespace Bpba.Api.PaginaModelo.Controllers
     public class LoginController : ApiController
     {
 
-        [Route("login")]
+        [Route("login/token")]
         [HttpPost]
         public CookieModel Login(UsuarioModel usuario)
         {
@@ -18,7 +18,7 @@ namespace Bpba.Api.PaginaModelo.Controllers
             SesionVal sesion = null;
             SesionVal.CleanSesiones();
             if (login.IsValid)
-                sesion = SesionVal.CreateSesion(login.ValidUser, new TimeSpan(0,1,0));
+                sesion = SesionVal.CreateSesion(login.ValidUser, new TimeSpan(0,45,0));
             return sesion?.Cookie;
         }
     }
