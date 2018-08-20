@@ -24,9 +24,15 @@ namespace Bpba.Api.PaginaModelo.Controllers
         [HttpPost]
         public void ModificarDatosPersonales(PersonaModel persona)
         {
-            var token = new Converter().GetHeaderKeyPair(ActionContext, 
-                ConfigurationManager.AppSettings["CookieName"]);
-            Console.WriteLine();
+            var keyToken = ConfigurationManager.AppSettings["CookieName"];
+            var valueToken = new Converter().GetHeaderKeyPair(ActionContext, keyToken);
+            SesionVal sesion = new SesionVal(new CookieModel
+            {
+                Key = keyToken,
+                Value = valueToken
+            });
+            UsuarioModel usuario = sesion.GetUsuario();
+            //_usuarios.SetDatosPersonales(usuario.Id, persona);
         }
         [SecurityAccess(Roles = AccountAccess.USER)]
         [Route("articulo/registrar")]
