@@ -227,6 +227,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Util, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tasasoft.Util.1.0.0\lib\Util.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -297,10 +301,6 @@
     <ProjectReference Include="..\Bpba.Services.PaginaModelo\Bpba.Services.PaginaModelo.csproj">
       <Project>{2913e40f-2153-4ab9-a2bf-45d2894acb0e}</Project>
       <Name>Bpba.Services.PaginaModelo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Util\Util.csproj">
-      <Project>{5318d596-0a48-4163-a4ff-fb1add217d32}</Project>
-      <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
