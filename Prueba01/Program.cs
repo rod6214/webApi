@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Util.Converters;
-using Util.Enums;
+//using Util.Converters;
+//using Util.Enums;
 
 namespace Prueba01
 {
@@ -28,46 +28,47 @@ namespace Prueba01
             //TimeSpan time = new TimeSpan(365, 0, 0, 0, 0);
             //DateTime duracion = DateTime.Now;
             //DateTime dur2 = duracion + time;
-            RootRegister();
-            
+            //RootRegister();
+            //AccountAccess access = AccountAccess.ADMIN | AccountAccess.USER;   
         }
 
-        public static void RootRegister()
-        {
-            PersonaRetriever perRet = new PersonaRetriever();
-            UsuarioRetriever usrRet = new UsuarioRetriever();
-            PerfilRetriever perfRet = new PerfilRetriever();
-            Converter converter = new Converter();
-            if(perRet.GetAll().Count() <= 0)
-            {
-                perRet.Register(new PersonaModel
-                {
-                    Id = 0,
-                    Nombre = "Nelson",
-                    Apellido = "Amador",
-                    Correo = "rod6232@hotmail.com",
-                    Direccion = "",
-                    Pais = Country.VENEZUELA,
-                    Telefono = ""
-                });
-                PersonaModel root = perRet.GetById(1);
-                usrRet.Register(new UsuarioModel
-                {
-                    Id = 0,
-                    Lastlogin = DateTime.Now,
-                    Nombre = "admin",
-                    Pass = converter.Encrypt256("admin"),
-                    Persona_id = root.Id
-                });
-                UsuarioModel rootUser = usrRet.GetById(1);
-                perfRet.Register(new PerfilModel
-                {
-                    Id = 0,
-                    Acceso = AccountAccess.ROOT,
-                    Descripcion = "Cuenta Maestra",
-                    Usuario_id = rootUser.Id
-                });
-            }
-        }
+
+        //public static void RootRegister()
+        //{
+        //    PersonaRetriever perRet = new PersonaRetriever();
+        //    UsuarioRetriever usrRet = new UsuarioRetriever();
+        //    PerfilRetriever perfRet = new PerfilRetriever();
+        //    Converter converter = new Converter();
+        //    if(perRet.GetAll().Count() <= 0)
+        //    {
+        //        perRet.Register(new PersonaModel
+        //        {
+        //            Id = 0,
+        //            Nombre = "Nelson",
+        //            Apellido = "Amador",
+        //            Correo = "rod6232@hotmail.com",
+        //            Direccion = "",
+        //            Pais = Country.VENEZUELA,
+        //            Telefono = ""
+        //        });
+        //        PersonaModel root = perRet.GetById(1);
+        //        usrRet.Register(new UsuarioModel
+        //        {
+        //            Id = 0,
+        //            Lastlogin = DateTime.Now,
+        //            Nombre = "admin",
+        //            Pass = converter.Encrypt256("admin"),
+        //            Persona_id = root.Id
+        //        });
+        //        UsuarioModel rootUser = usrRet.GetById(1);
+        //        perfRet.Register(new PerfilModel
+        //        {
+        //            Id = 0,
+        //            Acceso = AccountAccess.ROOT,
+        //            Descripcion = "Cuenta Maestra",
+        //            Usuario_id = rootUser.Id
+        //        });
+        //    }
+        //}
     }
 }

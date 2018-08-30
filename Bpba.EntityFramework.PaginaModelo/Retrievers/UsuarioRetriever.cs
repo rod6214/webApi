@@ -1,5 +1,6 @@
 ﻿using Bpba.EntityFramework.PaginaModelo.EntityModel;
 using Bpba.EntityFramework.PaginaModelo.Mappers.Usuarios;
+using Bpba.Models.PaginaModelo.Sesiones;
 using Bpba.Models.PaginaModelo.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,16 @@ namespace Bpba.EntityFramework.PaginaModelo.Retrievers
                         yield return _usrMMap.MapNew(usuario);
             }
         }
-
+        public UsuarioModel GetUsuarioBySesion(SesionModel sesionM)
+        {
+            using (var db = new paginaEntities())
+            {
+                var sesion = db.Usuarios?.Where(x => x.id == sesionM.Usuario_id)?.FirstOrDefault();
+                if (sesion != null)
+                    return _usrMMap.MapNew(sesion);
+                return null;
+            }
+        }
         public UsuarioModel GetById(int id)
         {
             using (var db = new paginaEntities())

@@ -28,7 +28,6 @@ namespace Bpba.EntityFramework.PaginaModelo.Retrievers
                 }
             }
         }
-
         public void Delete(string sesionName)
         {
             bool status;
@@ -36,7 +35,6 @@ namespace Bpba.EntityFramework.PaginaModelo.Retrievers
             if (status)
                 Delete(id);
         }
-
         public IEnumerable<SesionModel> GetAll()
         {
             using (var db = new paginaEntities())
@@ -48,7 +46,16 @@ namespace Bpba.EntityFramework.PaginaModelo.Retrievers
                 }
             }
         }
-
+        public SesionModel GetByUsuarioId(int usuarioId)
+        {
+            using (var db = new paginaEntities())
+            {
+                var sesion = db.Sesiones?.Where(x => x.Usuario_id == usuarioId)?.FirstOrDefault();
+                if (sesion != null)
+                    return _sesMMap.MapNew(sesion);
+                return null;
+            }
+        }
         public SesionModel GetById(int id)
         {
             
@@ -58,7 +65,17 @@ namespace Bpba.EntityFramework.PaginaModelo.Retrievers
                 return _sesMMap.MapNew(sesion);
             }
         }
-
+        public SesionModel GetByKeyPair(Tuple<string, string> keyValue)
+        {
+            using (var db = new paginaEntities())
+            {
+                var sesion = db.Sesiones?.
+                    Where(x => x.key.Equals(keyValue.Item1) && x.value.Equals(keyValue.Item2))?.FirstOrDefault();
+                if (sesion != null)
+                    return _sesMMap.MapNew(sesion);
+                return null;
+            }
+        }
         public SesionModel GetById(string sesionName)
         {
             bool status;
@@ -67,7 +84,6 @@ namespace Bpba.EntityFramework.PaginaModelo.Retrievers
                 return GetById(id);
             return null;
         }
-
         public SesionModel Register(SesionModel src)
         {
             using (var db = new paginaEntities())
@@ -81,7 +97,6 @@ namespace Bpba.EntityFramework.PaginaModelo.Retrievers
                 return null;
             }
         }
-
         public void Update(SesionModel src)
         {
             using (var db = new paginaEntities())
